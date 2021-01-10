@@ -1,0 +1,79 @@
+{
+  "parks": [
+    {
+      "id": "magic-kingdom",
+      "name": "Magic Kingdom",
+      "rides": [
+        "Main Street Vehicles",
+        "Walt Disney World Railroad",
+        "Jungle Cruise",
+        "Pirates of the Caribbean",
+        "Magic Carpets of Aladdin",
+        "Splash Mountain",
+        "Big Thunder Mountain",
+        "Rafts to Tom Sawyer Island",
+        "Liberty Belle Riverboat",
+        "Haunted Mansion",
+        "It’s a Small World",
+        "Peter Pan’s Flight",
+        "Prince Charming Regal Carousel",
+        "Many Adventures of Winnie the Pooh",
+        "Under the Sea — Journey of the Little Mermaid",
+        "Seven Dwarfs Mine Train",
+        "Mad Tea Party",
+        "Dumbo the Flying Elephant",
+        "Barnstormer",
+        "Tomorrowland Speedway",
+        "Tomorrowland Transit Authority PeopleMover",
+        "Space Mountain",
+        "Buzz Lightyear Space Ranger Spin",
+        "AstroOrbiter",
+        "Carousel of Progress"
+      ]
+    },
+    {
+      "id": "epcot",
+      "name": "Epcot",
+      "rides": [
+        "Spaceship Earth",
+        "Mission: SPACE",
+        "Test Track",
+        "Gran Fiesta Tour",
+        "Journey Into Imagination",
+        "Soarin’",
+        "Living with the Land",
+        "The Seas with Nemo and Friends",
+        "Frozen Ever After"
+      ]
+    },
+    {
+      "id": "hollywood-studios",
+      "name": "Hollywood Studios",
+      "rides": [
+        "Toy Story Midway Mania",
+        "Star Tours",
+        "Rock ‘n’ Roller Coaster",
+        "Twilight Zone Tower of Terror",
+        "Slinky Dog Dash",
+        "Alien Swirling Saucers",
+        "Millennium Falcon Smugglers Run",
+        "Star Wars: Rise of the Resistance",
+        "Mickey & Minnie’s Runaway Railway"
+      ]
+    },
+    {
+      "id": "animal-kingdom",
+      "name": "Animal Kingdom",
+      "rides": [
+        "Kilimanjaro Safari",
+        "Wildlife Express",
+        "Kali River Rapids",
+        "Expedition Everest",
+        "Dinosaur",
+        "TriceraTop Spin",
+        "Flight of Passage",
+        "Na’vi River Journey"
+      ]
+    }
+  ]
+}
