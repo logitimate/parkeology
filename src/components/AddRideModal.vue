@@ -2,16 +2,20 @@
   <div v-if="show">
     <div
       class="fixed overflow-x-hidden overflow-y-auto inset-0 flex justify-center items-center z-50"
+      @click="close('backdrop')"
     >
       <div class="relative mx-auto w-auto max-w-2xl">
-        <div class="bg-white w-full flex flex-col p-10">
+        <div
+          class="bg-white h-screen md:h-1/4 w-full flex flex-col py-10 px-40 lg:rounded lg:p-10"
+          v-on:click.stop
+        >
           <label for="attraction" class="mb-10">Attraction</label>
           <select
             v-model="selectedAttraction"
             @change="buildAttemptEntry()"
             name="attraction"
             id="attraction"
-            class="mb-10 border-gray-300"
+            class="mb-10 border"
           >
             <optgroup
               v-bind:label="park.name"
@@ -26,13 +30,15 @@
               </option>
             </optgroup>
           </select>
-          <button
-            class="primary"
-            @click="add()"
-            v-bind:disabled="!selectedAttraction"
-          >
-            Add
-          </button>
+          <div class="flex justify-center">
+            <button
+              class="primary w-full lg:w-1/4"
+              v-bind:disabled="!selectedAttraction"
+              @click="close('add')"
+            >
+              Add
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -41,20 +47,30 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from "vue-property-decorator";
+import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
 import { AttemptEntry } from "@/models/attempt-entry";
 import _parks from "@/models/parks.json";
+import { Park } from "@/models/park";
 
 @Component
 export default class AddRideModal extends Vue {
   selectedAttraction = null;
-  @Prop() show = false;
+  parks = null;
 
-  @Emit("add") add() {
-    return this.buildAttemptEntry();
+  @Prop() show = false;
+  @Prop() completedRides: AttemptEntry[];
+
+  @Watch("show", { immediate: true, deep: true })
+  onShowChange() {
+    this.parks = this.removeCompletedOptions(_parks.parks, this.completedRides);
   }
 
-  parks = _parks.parks;
+  @Emit("close") close(action: string) {
+    return {
+      action,
+      data: action === "add" ? this.buildAttemptEntry() : null
+    };
+  }
 
   buildAttemptEntry(): AttemptEntry {
     const park = this.parks.find(park =>
@@ -65,6 +81,20 @@ export default class AddRideModal extends Vue {
       attraction: this.selectedAttraction,
       completed: new Date()
     };
+  }
+
+  removeCompletedOptions(parks: Park[], completedRides: AttemptEntry[]) {
+    if (completedRides.length === 0) {
+      return parks;
+    }
+
+    return parks.reduce((notCompletedParks, park) => {
+      park.rides = park.rides.filter(ride => {
+        return !completedRides.map(ride => ride.attraction).includes(ride);
+      });
+      notCompletedParks.push(park);
+      return notCompletedParks;
+    }, []);
   }
 }
 </script>
